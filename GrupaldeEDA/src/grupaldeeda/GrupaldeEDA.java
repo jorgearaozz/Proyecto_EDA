@@ -9,12 +9,10 @@ package grupaldeeda;
  * @author PC
  */
 public class GrupaldeEDA {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+
+
+        //prueba de pull
     }
     
 }
