@@ -3,6 +3,7 @@ public class GestionExpediente<T> {
     
     private Nodo<T> frente;
     private Nodo<T> ultimo;
+    private int fechainicio,horainicio,fechafin,horafin;
     
     public GestionExpediente() {
         frente = null;
@@ -17,6 +18,8 @@ public class GestionExpediente<T> {
         }
     }
     
+    //Las fechas y horas por ahora estan en 0 hasta 
+    //que entienda como implementarlo
     public void encolar(T pElemento){
         if (esVacia() == true){
             Nodo<T> nuevoNodo = new Nodo<T>(pElemento, null);
@@ -62,6 +65,12 @@ public class GestionExpediente<T> {
         }
     }
     
-    
+    public String FinTramite(Expediente Expediente){
+        return "Fecha de inicio: "+this.fechainicio+
+                "\nHora de inicio: "+this.horainicio+
+                "\nFecha de fin:"+this.fechafin+
+                "\nFecha de fin: "+this.horainicio+
+                "\nDocumentos: "+Expediente.getId()+Expediente.getAsunto()+Expediente.getDocumento()+"\n";
+    }
     
 }

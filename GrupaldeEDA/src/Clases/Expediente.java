@@ -42,10 +42,6 @@ public class Expediente extends DatosExpediente{
     public void setPrioridad(int prioridad) {
         this.prioridad = prioridad;
     }
-
-    
-    
-    
     
 }
 
