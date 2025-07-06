@@ -11,12 +11,6 @@ public class AgregarExpediente extends javax.swing.JFrame {
         initComponents();
     }
      
-    
-    
-   
-    
-    
-    
     public AgregarExpediente() {
         initComponents();
     }
