@@ -4,10 +4,11 @@ public class GestionExpediente<T> {
     private Nodo<T> frente;
     private Nodo<T> ultimo;
     private int fechainicio,horainicio,fechafin,horafin;
-    
+    private Nodo<T> inicioLista;
     public GestionExpediente() {
         frente = null;
         ultimo = null;
+        inicioLista =null;
     }
     
     public boolean esVacia() {
@@ -72,5 +73,35 @@ public class GestionExpediente<T> {
                 "\nFecha de fin: "+this.horainicio+
                 "\nDocumentos: "+Expediente.getId()+Expediente.getAsunto()+Expediente.getDocumento()+"\n";
     }
+     public void agregarALista(T elemento) {
+        Nodo<T> nuevo = new Nodo<>(elemento, null);
+        if (inicioLista == null) {
+            inicioLista = nuevo;
+            nuevo.setSgteNodo(inicioLista); // apuntamos a sí mismo
+        } else {
+            Nodo<T> aux = inicioLista;
+            while (aux.getSgteNodo() != inicioLista) {
+                aux = aux.getSgteNodo();
+            }
+            aux.setSgteNodo(nuevo);
+            nuevo.setSgteNodo(inicioLista); // cierra el ciclo
+        }
+    }
+
+    public void mostrarLista() {
+        if (inicioLista == null) {
+            System.out.println("Lista vacía");
+            return;
+        }
+
+        System.out.println("Lista circular de expedientes:");
+        Nodo<T> aux = inicioLista;
+        do {
+            System.out.println(aux.getElemento());
+            aux = aux.getSgteNodo();
+        } while (aux != inicioLista);
+    }
+    
+    
     
 }
