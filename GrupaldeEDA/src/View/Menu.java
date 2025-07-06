@@ -4,7 +4,10 @@
  */
 package View;
 
+import Clases.Expediente;
 import Clases.GestionExpediente;
+import Clases.Nodo;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,6 +20,7 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public Menu() {
+        gestionExp = new GestionExpediente();
         initComponents();
     }
 
@@ -32,7 +36,9 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TListaExpedientes = new javax.swing.JTable();
         BAgreagar = new javax.swing.JButton();
-        BListar = new javax.swing.JButton();
+        Bmostrar = new javax.swing.JButton();
+        BMover = new javax.swing.JButton();
+        BEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,10 +62,24 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        BListar.setText("Listar Expedientes");
-        BListar.addActionListener(new java.awt.event.ActionListener() {
+        Bmostrar.setText("Mostrar Expedientes");
+        Bmostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BListarActionPerformed(evt);
+                BmostrarActionPerformed(evt);
+            }
+        });
+
+        BMover.setText("Mover Expediente");
+        BMover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BMoverActionPerformed(evt);
+            }
+        });
+
+        BEliminar.setText("Eliminar Expediente");
+        BEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BEliminarActionPerformed(evt);
             }
         });
 
@@ -69,25 +89,33 @@ public class Menu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BMover, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BAgreagar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(BAgreagar)
-                        .addGap(45, 45, 45)
-                        .addComponent(BListar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(Bmostrar)
+                    .addComponent(BEliminar))
+                .addGap(131, 131, 131))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BAgreagar)
-                    .addComponent(BListar))
-                .addGap(27, 27, 27))
+                    .addComponent(Bmostrar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BMover)
+                    .addComponent(BEliminar))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -99,7 +127,7 @@ public class Menu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BAgreagarActionPerformed
 
-    private void BListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BListarActionPerformed
+    private void BmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BmostrarActionPerformed
         DefaultTableModel modelo_tabla = new DefaultTableModel();
         this.TListaExpedientes.setModel(modelo_tabla);
         modelo_tabla.addColumn("ID");
@@ -110,9 +138,49 @@ public class Menu extends javax.swing.JFrame {
         modelo_tabla.addColumn("Nombre");
         modelo_tabla.addColumn("Telefono");
         modelo_tabla.addColumn("Correo");
+        modelo_tabla.addColumn("Ubicacion");
+        
+        Expediente Eaux = new Expediente("","","",0,"","","","","");
+        GestionExpediente aux = new GestionExpediente();
+        int count = 0;
+        while(!gestionExp.esVacia()){
+            Eaux = (Expediente)gestionExp.desencolar();
+            aux.encolar(Eaux);
+            modelo_tabla.insertRow(count, new Object[]{
+                Eaux.getId(),
+                Eaux.getAsunto(),
+                Eaux.getDocumento(),
+                Eaux.getPrioridad(),
+                Eaux.getDni(),
+                Eaux.getNombre(),
+                Eaux.getTelefono(),
+                Eaux.getCorreo(),
+                Eaux.getUbicacion()
+            });
+            count++;
+            aux.encolar(Eaux);
+        }
+        while(!aux.esVacia()){
+            gestionExp.encolar(aux.desencolar());
+        }
         
         
-    }//GEN-LAST:event_BListarActionPerformed
+    }//GEN-LAST:event_BmostrarActionPerformed
+
+    private void BMoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMoverActionPerformed
+        Expediente Eaux = new Expediente("","","",0,"","","","","");
+        
+    }//GEN-LAST:event_BMoverActionPerformed
+
+    private void BEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BEliminarActionPerformed
+        int fila = TListaExpedientes.getSelectedRow();
+        if (fila >= 0) {
+            DefaultTableModel modelo = (DefaultTableModel) TListaExpedientes.getModel();
+            modelo.removeRow(fila); 
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay fila seleccionada");
+        }
+    }//GEN-LAST:event_BEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,7 +220,9 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BAgreagar;
-    private javax.swing.JButton BListar;
+    private javax.swing.JButton BEliminar;
+    private javax.swing.JButton BMover;
+    private javax.swing.JButton Bmostrar;
     private javax.swing.JTable TListaExpedientes;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
