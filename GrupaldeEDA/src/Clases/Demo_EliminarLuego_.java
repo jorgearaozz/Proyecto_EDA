@@ -9,6 +9,8 @@ public class Demo_EliminarLuego_ {
         
         Tramite1.InsertarFrente(Expediente1);
         Tramite1.MostrarCola();
+        Tramite1.agregarALista(Expediente1);
+        Tramite1.mostrarLista();
         Menu x = new Menu();
         x.setVisible(true);
     }
