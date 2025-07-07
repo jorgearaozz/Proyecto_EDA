@@ -11,12 +11,21 @@ public class Local extends GestionExpediente{
         }
     }
     
-    public void MostrarColas(){
+    public String MostrarColas(){
         String colas="Cola Prioritaria: "+
                 this.ListaExpedientePRIORIDAD.MostrarLista()+
                 "\n\nCola Regular: "+
                 this.ListaExpedienteREGULAR.MostrarLista();
-        System.out.println(colas);
+        return colas;
+    }
+    
+    public void FinTramite(){
+        if(ListaExpedientePRIORIDAD!=null){
+            System.out.println(FinTramite((Expediente)ListaExpedientePRIORIDAD.desencolar()));
+        }else{
+            System.out.println(FinTramite((Expediente)ListaExpedienteREGULAR.desencolar()));
+        }
+        
     }
 
     @Override

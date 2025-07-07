@@ -140,7 +140,7 @@ public class Menu extends javax.swing.JFrame {
         modelo_tabla.addColumn("Correo");
         modelo_tabla.addColumn("Ubicacion");
         
-        Expediente Eaux = new Expediente("","","",0,"","","","","");
+        Expediente Eaux = new Expediente(0,0,"","",0,"","","");
         GestionExpediente aux = new GestionExpediente();
         int count = 0;
         while(!gestionExp.esVacia()){
@@ -155,7 +155,6 @@ public class Menu extends javax.swing.JFrame {
                 Eaux.getNombre(),
                 Eaux.getTelefono(),
                 Eaux.getCorreo(),
-                Eaux.getUbicacion()
             });
             count++;
             aux.encolar(Eaux);
@@ -168,7 +167,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_BmostrarActionPerformed
 
     private void BMoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMoverActionPerformed
-        Expediente Eaux = new Expediente("","","",0,"","","","","");
+        Expediente Eaux = new Expediente(0,0,"","",0,"","","");
         
     }//GEN-LAST:event_BMoverActionPerformed
 

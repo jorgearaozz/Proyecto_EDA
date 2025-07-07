@@ -48,7 +48,6 @@ public class GestionExpediente<T> {
     }
     
     public String FinTramite(Expediente Expediente){
-        desencolar();
         return "Fecha de inicio: "+this.fechainicio+
                 "\nHora de inicio: "+this.horainicio+
                 "\nFecha de fin:"+this.fechafin+
