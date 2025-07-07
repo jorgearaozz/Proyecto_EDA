@@ -189,15 +189,14 @@ public class AgregarExpediente extends javax.swing.JFrame {
     }//GEN-LAST:event_TFIDActionPerformed
 
     private void BGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarActionPerformed
-        Expediente x = new Expediente(this.TFID.getText(),
+        Expediente x = new Expediente(Integer.parseInt(this.TFID.getText()),
+                                    Integer.parseInt(this.TFPrioridad.getText()),
                                     this.TFAsunto.getText(),
                                     this.TFDocumento.getText(),
-                                    Integer.parseInt(this.TFPrioridad.getText()),
-                                    this.TFDNI.getText(),
+                                    Integer.parseInt(this.TFDNI.getText()),
                                     this.TFNombre.getText(),
                                     this.TFNombre.getText(),
-                                    this.TFCorreo.getText(),
-                                    this.TFDepartamento.getText());
+                                    this.TFCorreo.getText());
         GestionExp.encolar(x);
         JOptionPane.showMessageDialog(null,"El expediente fue agregado.");
         this.dispose();

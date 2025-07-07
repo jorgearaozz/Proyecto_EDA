@@ -1,46 +1,28 @@
 package Clases;
 public class DatosExpediente {
-    private String dni,nombre,telefono,correo;
+    private String nombre,telefono,correo;
+    private int dni;
 
-    public DatosExpediente(String dni, String nombre, String telefono, String correo) {
+    public DatosExpediente(int dni, String nombre, String telefono, String correo) {
         this.dni = dni;
         this.nombre = nombre;
         this.telefono = telefono;
         this.correo = correo;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
+    }  
 
     public String getNombre() {
         return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
     public String getCorreo() {
         return correo;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-    
-    
-    
+    public int getDni() {
+        return dni;
+    }    
 }

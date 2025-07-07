@@ -4,6 +4,7 @@ public class GestionExpediente<T> {
     private Nodo<T> frente;
     private Nodo<T> ultimo;
     private int fechainicio,horainicio,fechafin,horafin;
+    
     private Nodo<T> inicioLista;
     public GestionExpediente() {
         frente = null;
@@ -46,62 +47,26 @@ public class GestionExpediente<T> {
         }
     }
     
-    public void MostrarCola() {
-        Nodo<T> aux = frente;
-        while (aux != null) {
-            System.out.print(" " + aux.getElemento());
-            aux = aux.getSgteNodo();
-        }
-    }
-    
-    public void InsertarFrente(T Elemento) {
-        if (esVacia() == true) {
-            Nodo<T> nuevoNodo = new Nodo<T>(Elemento, null);
-            frente = nuevoNodo;
-            ultimo = nuevoNodo;
-        } else { // La cola no está vacía
-            Nodo<T> nuevoNodo = new Nodo<T>(Elemento, null);
-            nuevoNodo.setSgteNodo(frente);
-            frente = nuevoNodo;
-        }
-    }
-    
     public String FinTramite(Expediente Expediente){
+        desencolar();
         return "Fecha de inicio: "+this.fechainicio+
                 "\nHora de inicio: "+this.horainicio+
                 "\nFecha de fin:"+this.fechafin+
                 "\nFecha de fin: "+this.horainicio+
-                "\nDocumentos: "+Expediente.getId()+Expediente.getAsunto()+Expediente.getDocumento()+"\n";
+                "\nDocumentos: [dni: "+Expediente.getId()+", asunto: "+Expediente.getAsunto()+", documento: "+Expediente.getDocumento()+"]\n";
     }
-     public void agregarALista(T elemento) {
-        Nodo<T> nuevo = new Nodo<>(elemento, null);
-        if (inicioLista == null) {
-            inicioLista = nuevo;
-            nuevo.setSgteNodo(inicioLista); // apuntamos a sí mismo
+    
+    public String MostrarLista() {
+        Nodo<T> aux = frente;
+        String cola = "";
+        if (aux == null) {
+            cola = "Cola vacia.";
         } else {
-            Nodo<T> aux = inicioLista;
-            while (aux.getSgteNodo() != inicioLista) {
+            while (aux != null) {
+                cola += "\n" + (Expediente) aux.getElemento();
                 aux = aux.getSgteNodo();
             }
-            aux.setSgteNodo(nuevo);
-            nuevo.setSgteNodo(inicioLista); // cierra el ciclo
         }
+        return cola;
     }
-
-    public void mostrarLista() {
-        if (inicioLista == null) {
-            System.out.println("Lista vacía");
-            return;
-        }
-
-        System.out.println("Lista circular de expedientes:");
-        Nodo<T> aux = inicioLista;
-        do {
-            System.out.println(aux.getElemento());
-            aux = aux.getSgteNodo();
-        } while (aux != inicioLista);
-    }
-    
-    
-    
 }
